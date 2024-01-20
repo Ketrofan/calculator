@@ -4,42 +4,73 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .result {
+            border: 1px solid silver;
+            width: 175px;
+            height: 22px;
+            margin-top: 10px;
+        }
+
+        .result p {
+            margin: 0;
+            padding: 2px;
+            font-size: 16px;
+        }
+    </style>
 </head>
 <body>
-    <input id="a"\>
-        <div id="operator-btns">
-            <button id="plus" onclick="op='+'">+</button>
-            <button id="minus" onclick="op='-'">-</button>
-            <button id="times" onclick="op='*'">*</button>
-            <button id="divide" onclick="op='/'">/</button>
-        </div>
-    <input id="b"\>
-    <button onclick="func()">Решить</button>
-    <p id="result"></p>
+    <input id="a">
+    <div id="operator-btns">
+        <button id="plus" onclick="setOperation('+')">+</button>
+        <button id="minus" onclick="setOperation('-')">-</button>
+        <button id="times" onclick="setOperation('*')">*</button>
+        <button id="divide" onclick="setOperation('/')">/</button>
+        <button onclick="clearDisplay()">C</button>
+    </div>
+    <input id="b">
+    <br>
+    <button onclick="func()">=</button>
+    <div class="result">
+        <p id="result"></p>
+    </div>
     <script>
-var op;
-    function func(){
-        var result;
-        var a = Number(document.getElementById("a"). value);
-        var b = Number(document.getElementById("b"). value);
+        let currentOperation;
 
-        switch (op){
-            case '+':
-                result = a + b;
-                break;
-            case '-':
-                result = a - b;
-                break;
-            case '*':
-                result = a * b;
-                break;
-            case '/':
-                result = a / b;
-                break;
+        function setOperation(operator) {
+            currentOperation = operator;
         }
-    document.getElementById("result").innerHTML = result;    
 
-    }
+        function func() {
+            let result;
+            let a = Number(document.getElementById("a").value);
+            let b = Number(document.getElementById("b").value);
+
+            switch (currentOperation) {
+                case '+':
+                    result = a + b;
+                    break;
+                case '-':
+                    result = a - b;
+                    break;
+                case '*':
+                    result = a * b;
+                    break;
+                case '/':
+                    result = a / b;
+                    break;
+                default:
+                    result = 'Выберите операцию';
+            }
+
+            document.getElementById("result").innerHTML = result;
+        }
+
+        function clearDisplay() {
+            document.getElementById("a").value = '';
+            document.getElementById("b").value = '';
+            document.getElementById("result").innerHTML = '';
+        }
     </script>
 </body>
 </html>
